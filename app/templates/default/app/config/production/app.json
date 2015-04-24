@@ -1,0 +1,6 @@
+{
+  "debug": false,
+  "log.level": 1,
+  "log.path": "./storage/logs/app-production.log",
+  "cache.dir": "./storage/cache-production"
+}

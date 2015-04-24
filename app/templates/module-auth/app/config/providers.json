@@ -1,0 +1,67 @@
+{
+    "providers" : [
+        {
+            "class":"Saxulum\\DoctrineMongoDb\\Provider\\DoctrineMongoDbProvider",
+            "values":{
+                "server":"mongodb://localhost:27017",
+                "options":{
+                    "username" : "root",
+                    "password" : "root",
+                    "db" : "admin"
+                }
+            }
+        },
+        {
+            "class":"Saxulum\\DoctrineMongoDb\\Provider\\DoctrineMongoDbOdmProvider",
+            "values":{
+                "mongodbodm.proxies_dir" : "/path/to/proxies",
+                "mongodbodm.hydrator_dir" : "/path/to/hydrator",
+                "mongodbodm.dm.options" : {
+                    "database" : "test",
+                    "mappings" : [
+                        {
+                            "type" : "annotation",
+                            "namespace" : "Foo\\Entities",
+                            "path" : "/src/Foo/Entities"
+                        },
+                        {
+                            "type" : "xml",
+                            "namespace" : "Bat\\Entities",
+                            "path" : "/src/Bat/Resources/mappings"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "class":"Silex\\Provider\\SessionServiceProvider"
+        },
+        {
+            "class":"Silex\\Provider\\SecurityServiceProvider",
+            "values":{
+                "security.firewalls" : {
+                    "admin":{
+                        "pattern": "^/admin",
+                        "form" :{
+                            "login_path": "/login", 
+                            "check_path": "/admin/login_check"
+                        },
+                        "logout":{
+                            "logout_path": "/logout"
+                        }
+                    },
+                    "default": {
+                        "pattern": "^.*$",
+                        "anonymous": true
+                    }
+                },
+                "security.role_hierarchy": {
+                    "ROLE_ADMIN": ["ROLE_USER", "ROLE_ALLOWED_TO_SWITCH"]
+                },
+                "security.access_rules": [
+                    ["^/admin", "ROLE_ADMIN"]
+                ]
+            }
+        }
+    ]
+}

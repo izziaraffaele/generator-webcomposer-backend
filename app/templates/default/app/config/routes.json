@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "routeName": "home",
+      "pattern": "/",
+      "method": [
+        "get"
+      ],
+      "controller": "controller.home:index"
+    },
+    {
+      "routeName": "home",
+      "pattern": "/home",
+      "method": [
+        "get"
+      ],
+      "controller": "controller.home:index"
+    }
+  ]
+}

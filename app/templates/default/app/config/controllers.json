@@ -1,0 +1,5 @@
+{
+  "controllers": {
+    "home": "AppBundle\\Controllers\\HomeController"
+  }
+}

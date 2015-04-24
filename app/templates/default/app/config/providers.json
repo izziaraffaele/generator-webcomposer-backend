@@ -1,0 +1,19 @@
+{
+  "providers": [
+    {
+      "class": "Silex\\Provider\\ServiceControllerServiceProvider"
+    },
+    {
+      "class": "Silex\\Provider\\UrlGeneratorServiceProvider"
+    },
+    {
+      "class": "Silex\\Provider\\TwigServiceProvider",
+      "values": {
+        "twig.path": [
+          ".app/views",
+          ".app/templates"
+        ]
+      }
+    }
+  ]
+}

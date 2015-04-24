@@ -1,0 +1,5 @@
+{
+  "controllers": {
+    "auth": "AppBundle\\Controllers\\AuthController"
+  }
+}
