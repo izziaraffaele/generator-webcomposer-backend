@@ -10,8 +10,8 @@
       "class": "Silex\\Provider\\TwigServiceProvider",
       "values": {
         "twig.path": [
-          ".app/views",
-          ".app/templates"
+          "%base_path%/app/views",
+          "%base_path%/app/templates"
         ]
       }
     }

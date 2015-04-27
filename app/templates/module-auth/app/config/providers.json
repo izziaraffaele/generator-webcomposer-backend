@@ -1,35 +1,15 @@
 {
     "providers" : [
         {
-            "class":"Saxulum\\DoctrineMongoDb\\Provider\\DoctrineMongoDbProvider",
+            "class":"Saxulum\\DoctrineMongoDb\\Silex\\Provider\\DoctrineMongoDbProvider",
             "values":{
-                "server":"mongodb://localhost:27017",
-                "options":{
-                    "username" : "root",
-                    "password" : "root",
-                    "db" : "admin"
-                }
-            }
-        },
-        {
-            "class":"Saxulum\\DoctrineMongoDb\\Provider\\DoctrineMongoDbOdmProvider",
-            "values":{
-                "mongodbodm.proxies_dir" : "/path/to/proxies",
-                "mongodbodm.hydrator_dir" : "/path/to/hydrator",
-                "mongodbodm.dm.options" : {
-                    "database" : "test",
-                    "mappings" : [
-                        {
-                            "type" : "annotation",
-                            "namespace" : "Foo\\Entities",
-                            "path" : "/src/Foo/Entities"
-                        },
-                        {
-                            "type" : "xml",
-                            "namespace" : "Bat\\Entities",
-                            "path" : "/src/Bat/Resources/mappings"
-                        }
-                    ]
+                "mongodb.options":{
+                    "server":"mongodb://ds039211.mongolab.com:39211",
+                    "options":{
+                        "username" : "test",
+                        "password" : "testtestraffa",
+                        "db" : "app"
+                    }
                 }
             }
         },

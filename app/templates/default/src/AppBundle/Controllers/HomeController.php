@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Controllers;
 
-use WebComposer\Controller;
+use WebComposer\Component\Http\Controller;
 
 class HomeController extends Controller
 {

@@ -102,9 +102,9 @@ var Generator = yeoman.generators.Base.extend({
         }
         
         this.write('composer.json',JSON.stringify(this.configs.composerDeps,null,2));
-        this.write('app/config/controllers.json',JSON.stringify(this.configs.controllers,null,2));
-        this.write('app/config/providers.json',JSON.stringify(this.configs.providers,null,2));
-        this.write('app/config/routes.json',JSON.stringify(this.configs.routes,null,2));
+        this.write('app/config/controllers.json',JSON.stringify({"controllers":this.configs.controllers},null,2));
+        this.write('app/config/providers.json',JSON.stringify({"providers":this.configs.providers},null,2));
+        this.write('app/config/routes.json',JSON.stringify({"routes":this.configs.routes},null,2));
     }
 });
 

@@ -1,6 +1,6 @@
 {
   "debug": true,
   "log.level": 3,
-  "log.path": "./storage/logs/app-development.log",
-  "cache.dir": "./storage/cache-development"
+  "log.path": "%base_path%/storage/logs/app-development.log",
+  "cache.dir": "%base_path%/storage/cache-development"
 }
