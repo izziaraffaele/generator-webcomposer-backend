@@ -14,10 +14,11 @@ use WebComposer\Provider\ErrorHandlerServiceProvider;
 $app = new Application();
 $app['config.path'] = APPPATH;
 
-$app->register(new ConfigServiceProvider(),[
+$app->register(new ConfigServiceProvider());
+
+$app['config']->setGlobalReplacements([
     'base_path' => BASEPATH
 ]);
-
 $app['config']->loadFile('app.json');
 $app['config']->loadFile('controllers.json');
 $app['config']->loadFile('providers.json');
