@@ -3,6 +3,7 @@
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
+var extend = require('extend');
 var merge = require('merge');
 
 
@@ -33,12 +34,13 @@ var Generator = yeoman.generators.Base.extend({
     },
     app: function () {
 
-        this.configs = {
-            composerDeps : this.readConf('default/composer.json'),
-            controllers : this.readConf('default/app/config/controllers.json'),
-            providers : this.readConf('default/app/config/providers.json'),
-            routes : this.readConf('default/app/config/routes.json')
-        };
+        this.configs = extend(
+            {},
+            {composerDeps: this.readConf('default/composer.json')},
+            this.readConf('default/app/config/controllers.json'),
+            this.readConf('default/app/config/providers.json'),
+            this.readConf('default/app/config/routes.json')
+        );
 
         this.configs.composerDeps.name = this.options['projectName'];
 
@@ -47,8 +49,8 @@ var Generator = yeoman.generators.Base.extend({
 
         // webroot & bootstrap
         this.mkdir('app/config');
-        this.mkdir('app/config/development');
-        this.mkdir('app/config/production');
+        this.directory('default/app/config/development','app/config/development');
+        this.directory('default/app/config/production','app/config/production');
 
         this.directory('default/app/templates','app/templates');
         this.directory('default/app/views','app/views');
@@ -68,22 +70,37 @@ var Generator = yeoman.generators.Base.extend({
                 if( yeoman.file.exists(path.join(__dirname, 'templates/'+moduleName)) ) {
                     console.log(chalk.blue('Installing module: '+moduleName));
 
-                    this.configs = merge.recursive(this.configs,{
-                        composerDeps : this.tryReadConf(moduleName+'/deps.json'),
-                        controllers : this.tryReadConf(moduleName+'/app/config/controllers.json'),
-                        providers : this.tryReadConf(moduleName+'/app/config/providers.json'),
-                        routes : this.tryReadConf(moduleName+'/app/config/routes.json')
-                    });
+                    var config = extend(
+                        {},
+                        {composerDeps: this.tryReadConf(moduleName+'/deps.json')},
+                        this.tryReadConf(moduleName+'/app/config/controllers.json'),
+                        this.tryReadConf(moduleName+'/app/config/providers.json'),
+                        this.tryReadConf(moduleName+'/app/config/routes.json')
+                    );
+
+                    this.configs = merge.recursive(
+                        this.configs,
+                        {composerDeps: this.tryReadConf(moduleName+'/deps.json')},
+                        this.tryReadConf(moduleName+'/app/config/controllers.json')
+                    );
+
+                    var providers = this.tryReadConf(moduleName+'/app/config/providers.json');
+                    var routes = this.tryReadConf(moduleName+'/app/config/routes.json');
+
+                    if( providers.providers )
+                        this.configs.providers = this.configs.providers.concat(providers.providers);
+
+                    if( routes.routes )
+                        this.configs.routes = this.configs.routes.concat(routes.routes);
 
                     this.directory(moduleName+'/app/assets','app/assets');
                     this.directory(moduleName+'/app/views','app/views');
                     this.directory(moduleName+'/src','src');
                     this.directory(moduleName+'/tests','tests');
                 }
-
             },this);
         }
-
+        
         this.write('composer.json',JSON.stringify(this.configs.composerDeps,null,2));
         this.write('app/config/controllers.json',JSON.stringify(this.configs.controllers,null,2));
         this.write('app/config/providers.json',JSON.stringify(this.configs.providers,null,2));

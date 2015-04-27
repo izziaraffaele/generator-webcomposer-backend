@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "routeName": "login",
+      "pattern": "/login",
+      "method": [
+        "get"
+      ],
+      "controller": "controller.auth:login"
+    },
+    {
+      "routeName": "signup",
+      "pattern": "/signup",
+      "method": [
+        "get"
+      ],
+      "controller": "controller.auth:signup"
+    }
+  ]
+}
