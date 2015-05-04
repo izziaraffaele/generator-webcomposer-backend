@@ -1,5 +1,6 @@
 {
   "controllers": {
-    "home": "AppBundle\\Controllers\\HomeController"
+    "home": "AppBundle\\Controllers\\HomeController",
+    "admin": "AppBundle\\Controllers\\AdminController"
   }
 }

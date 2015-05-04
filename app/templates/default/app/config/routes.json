@@ -15,6 +15,14 @@
         "get"
       ],
       "controller": "controller.home:index"
+    },
+    {
+      "routeName": "admin_dashboard",
+      "pattern": "/admin",
+      "method": [
+        "get"
+      ],
+      "controller": "controller.admin:index"
     }
   ]
 }

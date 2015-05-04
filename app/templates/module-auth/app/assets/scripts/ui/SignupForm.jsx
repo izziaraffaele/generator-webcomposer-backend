@@ -8,6 +8,7 @@ var SignupForm = React.createClass({
     return {submitUrl:'signup'};
   },
   _handleSubmit:function(e){
+    e.preventDefault();
   },
   _handlePswChange:function(e){
     this.setState({psw:e.target.value});
